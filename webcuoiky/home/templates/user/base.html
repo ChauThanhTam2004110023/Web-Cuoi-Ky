@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/js/script.js">
+        <link rel="stylesheet" href="/static/js/slider.js">
+        <link rel="icon" href="/static/IMG/logo.png">
+        <!-- Responsive-->
+        <link rel="stylesheet" href="/static/css/responsive.css">
+
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="/static/IMG/logo.png" alt="logo Website">
+            </div>
+
+            <div class="menu">
+            {% for category in categories %}
+                <li><a href="{% url 'home:category' id=category.id %}">{{category.name}}</a></li>
+            {% endfor %}
+                {% comment %} <li><a href="{% url 'ton-giao' %}">Tôn Giáo</a></li>
+                <li><a href="thieu-nhi.html">Thiếu Nhi</a></li>
+                <li><a href="van-hoc.html">Văn Học</a></li>
+                <li><a href="tam-ly.html">Tâm Lý</a></li>
+                <li><a href="ngoai-ngu.html">Ngoại Ngữ</a></li>
+                <li><a href="kinh-te.html">Kinh Tế</a></li>
+                <li><a href="triet-hoc.html">Triết học</a></li>
+                <li><a href="giao-trinh.html">Giáo Trình</a></li>
+                <li><a href="tap-chi.html">Tạp Chí</a></li>
+                <li><a href="giai-tri.html">Giải Trí</a></li> {% endcomment %}
+
+            </div>
+
+            <form method="GET" action="{% url 'home:search' %}">
+                <div class="others">
+                    <li><input name="q" placeholder="Tìm kiếm" type="text"></li>
+                    {% comment %} <li><a class="fa fa-search" href=""><img src="/static/IMG/search.png" alt="image" title="icon search"width="50%"></a></li> {% endcomment %}
+                    {% comment %} <li><a class="fa fa-user" href="login.html"><img src="/static/IMG/user.png" alt="image" title="icon user"></a></li>
+                    <li><a class="fa fa-cart" href="cart.html"><img src="/static/IMG/cart.png" alt="image" title="cart"></a></li> {% endcomment %}
+                </div>
+            </form>
+        </header>
+        {% block cartegory %}
+        {% endblock  %}
+    <!-- ----------------app-container------------------>
+    <section class="app-container">
+        <p>Tải Ứng dụng Nhà Sách Công Giáo</p>
+        <div class="app-google">
+            <img src="/static/IMG/icon_appstore.png" alt="image" title="icon app store">
+            <img src="/static/IMG/icon_ggplay.png" alt="image" title="icon google paly">
+        </div>
+        <p>Hòm Thư Góp Ý Của Nhà Sách Công Giáo</p>
+        <input type="text" placeholder="Nhập email của bạn...">
+    </section>
+    <!-- ----------------Footer------------------>
+
+    <!-- ----------------app-container------------------>
+    <section class="app-container">
+        <p><b>Tải Ứng dụng Nhà Sách Công Giáo</b></p>
+        <div class="app-google">
+            <img src="/static/IMG/icon_appstore.png" alt="image" title="icon app store">
+            <img src="/static/IMG/icon_ggplay.png" alt="image" title="icon google paly">
+        </div>
+        <p>Hòm Thư Góp Ý Của Nhà Sách Công Giáo</p>
+        <input type="text" placeholder="Nhập email của bạn...">
+    </section>
+
+    <div class="footer-top">
+        <li><a href=""><img src="/static/IMG/da-thong-bao-voi-bo-cong-thuong.png" alt=""></a></li>
+        <li><a href=""></a>Liên hệ</li>
+        <li><a href=""></a>Tuyển dụng</li>
+        <li><a href=""></a>Giới thiệu</li>
+    </div>
+    <div class="footer-icon">
+        <li>
+            <a href=""><img src="https://pubcdn.ivymoda.com/ivy2/images/ic_fb.svg" alt=""></a>
+        </li>
+        <li>
+            <a href=""> <img src="https://pubcdn.ivymoda.com/ivy2/images/ic_instagram.svg" alt=""></a>
+        </li>
+        <li>
+            <a href=""><img src="	https://pubcdn.ivymoda.com/ivy2/images/ic_ytb.svg" alt=""></a>
+        </li>
+        <li>
+            <a href=""><img src="https://pubcdn.ivymoda.com/ivy2/images/ic_gg.svg" alt=""></a>
+        </li>
+        <li>
+            <a href=""><img src="	https://pubcdn.ivymoda.com/ivy2/images/ic_pinterest.svg" alt=""></a>
+        </li>
+    </div>
+    <div class="footer-center">
+        <p>
+            Giấy chứng nhận Đăng ký Kinh doanh số 01ABCD123456 cấp ngày 01/01/2022. <br>
+            Địa chỉ đăng kí: 120 Chiến thắng, phường 9, Quận Phú Nhuận, TP.HCM. <br>
+            Đặt hàng online: <b>0363 562 084</b>
+        </p>
+    </div>
+    <div class="footer-bottom">
+        ©NSCG All rights reserved
+    </div>
+    </body>
+</html>

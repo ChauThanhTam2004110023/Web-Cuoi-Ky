@@ -1,0 +1,173 @@
+{% extends "user/base.html" %}
+{% block title %}PRODUCT - Nhà Sách Công Giáo{% endblock %}
+
+{% block menu %}
+<div class="menu">
+    <li><a href="ton-giao.html">Tôn Giáo</a></li>
+    <li><a href="thieu-nhi.html">Thiếu Nhi</a></li>
+    <li><a href="van-hoc.html">Văn Học</a></li>
+    <li><a href="tam-ly.html">Tâm Lý</a></li>
+    <li><a href="ngoai-ngu.html">Ngoại Ngữ</a></li>
+    <li><a href="kinh-te.html">Kinh Tế</a></li>
+    <li><a href="triet-hoc.html">Triết học</a></li>
+    <li><a href="giao-trinh.html">Giáo Trình</a></li>
+    <li><a href="tap-chi.html">Tạp Chí</a></li>
+    <li><a href="giai-tri.html">Giải Trí</a></li>
+
+</div>
+{% endblock  %}
+
+{% block cartegory %}
+    <!------------------Product------------------>
+    <section class="product">
+        <div class="container">
+            <div class="cartegory-top row">
+                <p><a href = {% url 'home:index' %} >TRANG CHỦ</a> 
+                    {% if current_category != None %}
+                        / <a href = {% url 'home:category' id=current_category.id %} >{{current_category.name}}</a> / <a href = {% url 'home:product' id=product.id %} >{{product.name}}</a>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="product-content row">
+                <div class="product-content-left row">
+                    <div class="product-content-left-big-img">
+                        <img src="/{{product.images}}" alt="image" title="Trung tín với đời sống thánh hiến">
+                    </div>
+                </div>
+                <div class="product-content-right">
+                    <div class="product-content-right-product-name">
+                        <input type='hidden' name='id' value='{{product.id}}'></input>
+                        <h2>{{product.name}}</h2>
+                    </div>
+                    <div class="product-content-right-product-price">
+                        {% comment %} <p>• Tác giả: Lm Montfort Phạm Quốc Huyên O.Cist</p>
+                        <p>• Loại bìa: Bìa mềm</p>
+                        <p>• NXB: Hồng Đức</p>
+                        <p>• Kích thước: 14.5 x 20.5 cm</p>
+                        <p>• Số trang: 168 </p>
+                        <p>• Năm xuất bản: 10/2022</p> {% endcomment %}
+
+                        {% comment %} <p> {{product.descriptions | linebreaks }} </p> {% endcomment %}
+
+                        <p> {{product.descriptions | linebreaksbr  }} </p>
+                        <p>Giá: {{product.price |floatformat:3}}</p>
+                    </div>
+                    <div class="quantity">
+                        <p style="font-weight: bold;">Số lượng:</p>
+                        <input name="quantity" type="number" min="0" value="1">
+                        <p></p>
+                    </div>
+                    <div class="product-content-right-product-button">
+                        <a href="cart.html"><button id="add-to-cart-button">
+                            <p><a href="{% url 'home:cart' %}">MUA HÀNG</a></p> 
+                        </button></a> 
+                        <script>
+                            // Lấy thẻ button theo ID
+                            const addBtn = document.getElementById('add-to-cart-button');
+                            
+                            // Thêm sự kiện click vào button
+                            addBtn.addEventListener('click', function(event) {
+                              // Ngăn chặn hành động mặc định của button
+                              event.preventDefault();
+                              
+                              // Lấy giá trị của số lượng sản phẩm từ input
+                              const quantity = document.querySelector('input[name="quantity"]').value;
+                            
+                              // Lấy giá trị của id sản phẩm từ input
+                              const id = document.querySelector('input[name="id"]').value;
+                              
+                              // Tạo yêu cầu AJAX
+                                const xhr = new XMLHttpRequest();
+                                xhr.open('GET', '{% url "home:cart" %}?quantity=' + quantity + '&id=' + id + '&action=add-to-cart');
+                                xhr.onload = function() {
+                                // Xử lý kết quả trả về từ server
+                                console.log(xhr.responseText);
+                                // Chuyển hướng đến URL sau khi thực hiện xong
+                                window.location.href = '{% url "home:cart" %}';
+                                };
+                                xhr.send();
+                            });
+                        </script>
+
+                       
+                        
+
+
+
+
+                        <a href="books.html"><button>
+                            <p>TÌM TẠI CỬA HÀNG</p>
+                        </button></a> 
+                        
+                    </div>
+                    <div class="product-content-right-product-icon row">
+                        <div class="product-content-right-product-icon-item">
+                            <img src="/static/IMG/phone.png" alt="image"> <p>Hot line</p>
+                        </div>
+                        <div class="product-content-right-product-icon-item">
+                            <img src="/static/IMG/comment.jpg" alt="image"> <p>Mail</p>
+                        </div>
+                        <div class="product-content-right-product-icon-item">
+                            <img src="/static/IMG/mail.png" alt="image"> <p>Mail</p>
+                        </div>
+                        <div class="product-content-right-product-qr ">
+                            <img src="/static/IMG/qr.png" alt="image" width="17.5%">
+                        </div>
+                        <div class="product-content-right-bottom ">
+                            <div class="product-content-right-bottom-top row">
+                                &#8897;
+                            </div>
+                            <div class="product-content-right-bottom-content-big">
+                                <div class="product-content-right-bottom-content-title row">
+                                    <div class="product-content-right-bottom-content-title-item-thongbao">
+                                        <P>THÔNG BÁO</P>
+                                    </div>
+                                    <div class="product-content-right-bottom-content-title-item-thongtinbosung">
+                                        <p>THÔNG TIN BỔ SUNG</p>
+                                    </div>
+                                    <div class="product-content-right-bottom-content-title-item-mota">
+                                        <p>MÔ TẢ</p>
+                                    </div>
+                                </div>
+                                <div class="product-content-right-bottom-content">
+                                    <div class="product-content-right-bottom-content-thongbao">
+                                        Sau khi đặt hàng thành công, quý khách muốn thay đổi đơn hàng (hủy, thêm sản phẩm, đổi địa chỉ, ghép đơn...) <br> 
+                                        xin vui lòng cung cấp tên và số điện thoại qua email, zalo, messenger; chúng tôi sẽ xử lý nhanh nhất. <br>
+                                        Trong trường hợp quý khách có tài khoản, quý khách có thể chủ động điều chỉnh đơn hàng trong phần "Tài khoản" <br>
+                                        Xin chân thành cảm ơn.
+                                    </div>
+                                    <div class="product-content-right-bottom-content-thongtinbosung">
+                                        <b>TRỌNG LƯỢNG</b>200g
+                                    </div>
+                                    <div class="product-content-right-bottom-content-title-item-mota">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-------------PRODUCT-related------------>
+    <section class="product-related">
+        <div class="product-related-title">
+            <p>SẢN PHẨM LIÊN QUAN</p>
+        </div>
+        <div class="product-content row">
+
+            {% for product in products %}
+
+            <div class="product-related-item">
+                <img src="/{{product.images}}" alt="">
+                <h2>{{product.name}}</h2>
+                                <p> Giá: <b>{{product.price |floatformat:3}}</b><sup>VND</sup></p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </section>
+{% endblock  %}

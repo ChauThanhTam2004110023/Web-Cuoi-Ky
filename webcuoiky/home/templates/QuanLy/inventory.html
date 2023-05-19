@@ -1,0 +1,101 @@
+{% extends "QuanLy/base.html" %}
+{% block title %}Inventory"s Admin{% endblock %}
+
+{% block sidebar %}
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="las la-bible"></span><span>Books Store</span></h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                <a href="{% url 'home:us-index' %}"><span class="las la-igloo"></span>
+                    <span>Dashboard</span></a>
+            </li>
+            <!-- quản lý list khách hàng -->
+            <li>
+                <a href="{% url 'home:us-customer' %}"><span class="las la-users"></span>
+                    <span>Customers</span></a>
+            </li>
+            <!-- lưu danh sách sản phẩm -->
+            <li>
+                <a href="{% url 'home:us-products' %}"><span class="las la-clipboard-list"></span>
+                    <span>Products</span></a>
+            </li>
+            <!-- lưu đơn hàng -->
+            <li>
+                <a href="{% url 'home:us-order' %}"><span class="las la-shopping-bag"></span>
+                    <span>Orders</span></a>
+            </li>
+            <!-- lưu list các loại sách -->
+            <li>
+                <a href="{% url 'home:us-inventory' %}" class="active"><span class="las la-receipt"></span>
+                    <span>Category</span></a>
+            </li>
+            <!-- thêm tài khoản đăng nhập cho admin -->
+            <li>
+                <a href="{% url 'home:us-account' %}"><span class="las la-user-circle"></span>
+                    <span>Accounts</span></a>
+            </li>
+            <!-- quyền khóa trang web -->
+            <li>
+                <a href="{% url 'home:us-tasks' %}"><span class="las la-clipboard-list"></span>
+                    <span>Tasks</span></a>
+            </li>
+                <li>
+                    <a href="{% url 'home:logout' %}"><span class="las la-sign-out-alt"></span>
+                        <span>Log Out</span></a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>List Inventory</h2>
+        <div class="search-wrapper">
+            <span class="las la-search"></span>
+            <input type="search" placeholder="search id, name,...">
+        </div>
+
+    <div class="but-ed">
+        <a href="{% url 'home:a-inventory' %}"><button class="new-button las la-plus">Thêm</button></a>
+        <a href="{% url 'home:us-inventory' %}"><button class="reload-button las la-sync">Reload</button></a>
+        <a href="#"><button class="delete-button lar la-trash-alt">Delete</button></a>
+    </div>
+    <!------khung của inventory------>
+    <table>
+        <thead >
+            <tr>
+                <td></td>
+                <td>id</td>
+                <td>img</td>
+                <td>name category</td>
+                <td class="but-ed">Tools</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for inventory in inventorys %}
+        <div class="cartegory-right-content-item">
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>{{inventory.id}}</th>
+                <th class="thimg"><img src="/{{inventory.images}}" alt="img sách"></th>
+                <th>{{inventory.name}}</th>
+                <th class="but-ed">
+                    <a href="{% url 'home:a-delete-inventory' id=inventory.id %}"><button class="delete-button lar la-trash-alt">Delete</button></a>
+                    <a href="{% url 'home:a-update-inventory' id=inventory.id %}"><button class="edit-button las la-edit">Edit</button></a>
+                </th>
+            </tr>
+        </div>
+        {% endfor %}
+
+
+            
+        </tbody>
+    </table>
+</main>
+{% endblock %}

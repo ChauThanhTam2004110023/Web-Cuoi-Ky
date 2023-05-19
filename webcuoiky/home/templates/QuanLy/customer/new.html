@@ -1,0 +1,84 @@
+{% extends "user/base.html" %}
+{% block title %}New Customer{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2><span class="las la-bible"></span><span>Books Store</span></h2>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../index.html" ><span class="las la-igloo"></span>
+                    <span>Dashboard</span></a>
+            </li>
+            <!-- quản lý list khách hàng -->
+            <li>
+                <a href="../customer.html" class="active"><span class="las la-users"></span>
+                    <span>Customers</span></a>
+            </li>
+            <!-- lưu danh sách sản phẩm -->
+            <li>
+                <a href="../products.html"><span class="las la-clipboard-list"></span>
+                    <span>Products</span></a>
+            </li>
+            <!-- lưu đơn hàng -->
+            <li>
+                <a href="../orders.html" ><span class="las la-shopping-bag"></span>
+                    <span>Orders</span></a>
+            </li>
+            <!-- lưu list các loại sách -->
+            <li>
+                <a href="../inventory.html"><span class="las la-receipt"></span>
+                    <span>Inventory</span></a>
+            </li>
+            <!-- thêm tài khoản đăng nhập cho admin -->
+            <li>
+                <a href="../Account.html"><span class="las la-user-circle"></span>
+                    <span>Accounts</span></a>
+            </li>
+            <!-- quyền khóa trang web -->
+            <li>
+                <a href="../Tasks.html"><span class="las la-clipboard-list"></span>
+                    <span>Tasks</span></a>
+            </li>
+            <li>
+                <a href="../loginadmin.html"><span class="las la-sign-out-alt"></span>
+                    <span>Log Out</span></a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>New Customer</h2>
+    <div class="but-ed">
+        <a href="../customer.html"><button class="new-button las la-undo">Return</button></a>
+        <a href="#"><button class="delete-button lar la-trash-alt">Delete</button></a>
+    </div>
+    <div class="status">
+        <div class="forms-status">
+            <div class="form-infor">
+                <form action="">
+                    <label for="">Name</label><br>
+                    <input type="text" placeholder="...abc..."><br><br>
+                    <label for="">Email</label><br>
+                    <input type="text" placeholder="...@gmail.com"><br><br>
+                    <label for="">PhoneNumbers</label><br>
+                    <input type="text" placeholder="...012345"><br><br>
+                    <label for="">Username</label><br>
+                    <input type="text" placeholder="...123450"><br><br>
+                    <label for="">Password</label><br>
+                    <input type="password" placeholder="...012345"><br><br>
+                    <label for="">Point+</label><br>
+                    <input type="number" placeholder="+100,+..."><br><br>
+                    <button class="ok-button">OK</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

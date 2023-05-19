@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}LOGIN - Nhà Sách Công Giáo{% endblock %}
+
+{% block menu %}
+<div class="menu">
+    <li><a href="ton-giao.html">Tôn Giáo</a></li>
+    <li><a href="thieu-nhi.html">Thiếu Nhi</a></li>
+    <li><a href="van-hoc.html">Văn Học</a></li>
+    <li><a href="tam-ly.html">Tâm Lý</a></li>
+    <li><a href="ngoai-ngu.html">Ngoại Ngữ</a></li>
+    <li><a href="kinh-te.html">Kinh Tế</a></li>
+    <li><a href="triet-hoc.html">Triết học</a></li>
+    <li><a href="giao-trinh.html">Giáo Trình</a></li>
+    <li><a href="tap-chi.html">Tạp Chí</a></li>
+    <li><a href="giai-tri.html">Giải Trí</a></li>
+
+</div>
+{% endblock  %}
+
+{% block cartegory %}
+<!-- section -->
+<div class="form-login">
+    <div class="cover">
+        <h1 class="form-login-heading">ĐĂNG NHẬP</h1>
+        <form action="" class="form-login-form">
+            <label for="username">Tên đăng nhập</label><br>
+            <input type="text" id="username"><br>
+            <label for="password">password</label><br>
+            <input type="password" id="password"><br><br>
+            <button>Đăng nhập</button>
+        </form>
+    </div>
+</div>
+{% endblock  %}

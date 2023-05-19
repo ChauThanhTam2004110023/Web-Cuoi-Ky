@@ -1,0 +1,53 @@
+{% extends "QuanLy/base.html" %}
+
+{% block main %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="script.js">
+  <link rel="icon" href="../IMG/logo.png" type="image/x-icon">
+</head>
+<body>
+{% if page == 'login' %}
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form" method="POST" action="{% url 'home:login' %}">
+                {% csrf_token %}
+                <input type="username" name="username" placeholder="Enter username"/>
+                <input type="password" name="password" placeholder="Enter password"/>
+                <button type="submit">Đăng nhập</button>
+            </form>
+            <p>Haven't signed up get?</p>
+            <a href="{% url 'home:register' %}">Sign up</a>
+        </div>
+    </div>
+
+{% else %}
+<div class="form">
+    <form method="post">
+    <h1>Register</h1>
+        {% csrf_token %}
+        {% for field in forms %}
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
+                {{field}}
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+        <p>Already have an account<a href="{% url 'home:login' %}">Login</a></p>
+    </form>
+</div>
+
+
+{% endif %}
+</body>
+</html>
+
+{% endblock %}

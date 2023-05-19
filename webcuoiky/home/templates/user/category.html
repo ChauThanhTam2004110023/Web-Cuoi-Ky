@@ -1,0 +1,64 @@
+{% extends "user/base.html" %}
+{% block title %}SÁCH TÔN GIÁO{% endblock %}
+{% load static %}
+
+{% block cartegory %}  
+    <!--------------------Cartegory---------------------->
+    <section class="cartegory">
+        <div class="container">
+            <div class="cartegory-top row">
+                <p><a href = "{% url 'home:index' %}" >TRANG CHỦ</a> 
+                    {% if current_category != None %}
+                        / <a href = "{% url 'home:category' id=current_category.id %}" >{{current_category.name}}</a> 
+                    {% endif %}
+                </p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="cartegory-left">
+                        <ul>
+                            {% for category in categories %}
+                            <li class="cartegory-left-li"><a href="{% url 'home:category' id=category.id %}">{{category.name}}</a></li>
+
+                             {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="cartegory-right row">
+                        <div class="cartegory-right-top-item">
+                            <p>Có {{product_count}} sách {{current_category.name}}</p>
+                        </div>
+                        <div class="cartegory-right-top-item">
+                            <select name="" id="">
+                                <option value="">Sắp xếp</option>
+                                <option value="">Giá cao đến thấp</option>
+                                <option value="">Giá thấp đến cao</option>
+                            </select>
+                        </div>
+                        
+                        <div class="cartegory-right-content row">
+                        {% for product in products %}
+                            <!-- Danh sách books thánh hiến -->
+                            <div class="cartegory-right-content-item">
+                                <a href="{% url 'home:product' id=product.id %}"><img src="/{{product.images}}" alt="image" title="sách đs thánh hiến "></a>
+                                <a href="#">
+                                <h2>{{product.name}}</h2>
+                                <p>Giá: {{product.price |floatformat:3}} VND</p></a>
+
+                            </div>
+                        {% endfor %}
+
+                        </div>
+                        <div class="cartegory-right-bottom row">
+                            <div class="cartegory-right-bottom-items">
+                                <p>Hiện thị 2 <span>|</span> 4 Sản phẩm</p>
+                            </div>
+                            <div class="cartegory-right-bottom-items">
+                                <p><span>&#171;</span>1 2 3 4<span>&#187;</span>Trang cuối</p>
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>   
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends "user/base.html" %}
+{% block title %}CART - Nhà Sách Công Giáo{% endblock %}
+
+
+{% block cartegory %}
+ <!-- ----------------cart------------------>
+ <section class="cart">
+    <div class="container">
+        <div class="cart-top-wrap">
+            <div class="cart-top">
+                <div class="cart-top-cart cart-top-item">
+                    <i><img src="/static/IMG/cart.png" alt=""></i>
+                </div>
+                <div class="cart-top-cart cart-top-item">
+                    <i></i>
+                </div>
+                <div class="cart-top-cart cart-top-item">
+                    <i class="fa-duotone fa-money-check-dollar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="cart-content">
+            <div class="cart-content-left">
+                <table>
+                    <tr>
+                        <th>SẢN PHẨM</th>
+                        <th>TÊN SẢN PHẨM</th>
+                        <th>SỐ LƯỢNG</th>
+                        <th>THÀNH TIỀN</th>
+                        <th>XÓA</th>
+                    </tr>
+                    {% for item in items %}
+                        <tr>
+                            <td><img src="{{item.product.images}}" alt=""></td>
+                            <td><p>{{item.product.name}}</p></td>
+                            <td>
+                                <input type="number" value="{{item.quantity}}" data-item-id="{{item.product.id}}">
+                            </td>
+                            <td><p>Giá: {{item.price | floatformat:3}} VND</p></td>
+                            <td><button data-item-id="{{item.product.id}}">X</button></td>
+                        </tr>
+                    {% endfor %}
+
+                    <script>
+                        const quantityInputs = document.querySelectorAll('input[type="number"]');
+                        const deleteButtons = document.querySelectorAll('button[data-item-id]');
+                        
+                        // Gửi HTTP request khi thay đổi giá trị input
+                        quantityInputs.forEach(input => {
+                            input.addEventListener('input', function() {
+                            const itemId = input.dataset.itemId;
+                            const quantity = input.value;
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('GET', '{% url "home:cart" %}?id=' + itemId + '&quantity=' + quantity + '&action=update-cart');
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.onload = function() {
+                                // Xử lý kết quả trả về từ server
+                                //console.log(xhr.responseText);
+                                window.location.href = '{% url "home:cart" %}';
+                            };
+                            //console.log('HTTP request:', xhr);
+
+                            xhr.send(/*`id=${itemId}&quantity=${quantity}&action=update-cart`*/);
+                            });
+
+                            
+                        });
+  
+                        // Gửi HTTP request khi nhấn nút xóa
+                        deleteButtons.forEach(button => {
+                            button.addEventListener('click', function() {
+                            const itemId = button.dataset.itemId;
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('GET', '{% url "home:cart" %}?id=' + itemId + '&action=delete-cart');
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.onload = function() {
+                                // Xử lý kết quả trả về từ server
+                                //console.log(xhr.responseText);
+                                window.location.href = '{% url "home:cart" %}';
+                            };
+                            //console.log('HTTP request:', xhr);
+
+                            xhr.send(/*`id=${itemId}&action=delete-cart`*/);
+                            });
+                        });
+                    </script>
+
+                    
+                </table>
+            </div>
+            <div class="cart-content-right">
+                <table>
+                    <tr>
+                        <th colspan="2">TỔNG TIỀN GIỎ HÀNG</th>
+                    </tr>
+                    <tr>
+                        <td>TỔNG SẢN PHẦM</td>
+                        <td> {{items_count}} </td>
+                    </tr>
+                    <tr>
+                        <td>TỔNG TIỀN HÀNG</td>
+                        <td><b> {{total_price | floatformat:3}} </b>VND</td>
+                    </tr>
+                    <tr>
+                        <td>TẠM TÍNH</td>
+                        <td><p style="color: black; font-weight: bold;"><b>{{total_price | floatformat:3}} </b>VND</p></td>
+                    </tr>
+                </table>
+                <div class="cart-content-right-text">
+                    <p>Bạn sẽ được freeship khi đơn hàng của bạn tổng giá trị trên 200.000 VND</p>
+                    {% if money_to_free_ship %}
+                        <p style="color: red;">Mua thêm {{money_to_free_ship | floatformat:3}} VND để được freeship </p>
+                    {% endif %}
+                </div>
+                <div class="cart-content-right-button">
+                    {% if categories %}
+                        <a href="{% url 'home:category' id=categories.0.id %}"><button>TIẾP TỤC MUA SẮM</button></a>
+                    {% endif %}
+                    <a href="thanhtoan.html"><button>THANH TOÁN</button></a>
+                    
+                </div>
+                <div class="cart-content-right-dangnhap">
+                    <p>TÀI KHOẢN NSCG</p>
+                    <P>HÃY <a href="login.html">ĐĂNG NHẬP</a> tài khoản của bạn để được tích điểm thành viên</P>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+{% endblock  %}

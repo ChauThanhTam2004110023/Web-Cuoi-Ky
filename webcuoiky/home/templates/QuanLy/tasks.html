@@ -1,0 +1,87 @@
+{% extends "QuanLy/base.html" %}
+{% block title %}Nhà Sách Công Giáo{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2><span class="las la-bible"></span><span>Books Store</span></h2>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="{% url 'home:us-index' %}"><span class="las la-igloo"></span>
+                    <span>Dashboard</span></a>
+            </li>
+            <!-- quản lý list khách hàng -->
+            <li>
+                <a href="{% url 'home:us-customer' %}"><span class="las la-users"></span>
+                    <span>Customers</span></a>
+            </li>
+            <!-- lưu danh sách sản phẩm -->
+            <li>
+                <a href="{% url 'home:us-products' %}"><span class="las la-clipboard-list"></span>
+                    <span>Products</span></a>
+            </li>
+            <!-- lưu đơn hàng -->
+            <li>
+                <a href="{% url 'home:us-order' %}"><span class="las la-shopping-bag"></span>
+                    <span>Orders</span></a>
+            </li>
+            <!-- lưu list các loại sách -->
+            <li>
+                <a href="{% url 'home:us-inventory' %}"><span class="las la-receipt"></span>
+                    <span>Category</span></a>
+            </li>
+            <!-- thêm tài khoản đăng nhập cho admin -->
+            <li>
+                <a href="{% url 'home:us-account' %}"><span class="las la-user-circle"></span>
+                    <span>Accounts</span></a>
+            </li>
+            <!-- quyền khóa trang web -->
+            <li>
+                <a href="{% url 'home:us-tasks' %}" class="active"><span class="las la-clipboard-list"></span>
+                    <span>Tasks</span></a>
+            </li>
+            <li>
+                <a href="{% url 'home:logout' %}"><span class="las la-sign-out-alt"></span>
+                    <span>Log Out</span></a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>Settings</h2>
+    <div class="status">
+        <div class="panel-status">
+            <h3>Status</h3>
+        </div>
+        <div class="forms-status">
+            <label for=""><input type="radio" name="status">Close</label>
+            <label for=""><input type="radio" name="status">Open</label>
+            <button class="ok-button-status">OK</button>
+        </div>
+    </div>
+    <div class="status">
+        <div class="panel-status">
+            <h3>Information</h3>
+        </div>
+        <div class="forms-status">
+            <div class="form-infor">
+                <form action="">
+                    <label for="username">website Title</label><br>
+                    <input type="text" id="username" placeholder="Books store"><br>
+                    <label for="notes">website description</label><br>
+                    <input type="text" id="notes" placeholder="website sales books"><br><br>
+                    <label for="keys">Website keywords</label><br>
+                    <input type="text" id="keys" placeholder="..."><br><br>
+                    <button class="ok-button">OK</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

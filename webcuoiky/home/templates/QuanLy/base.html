@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/QuanLy/style.css">
+        <link rel="stylesheet" href="/static/js/script.js">
+        <link rel="stylesheet" href="/static/js/slider.js">
+        <link rel="icon" href="/static/IMG/logo.png">
+        <!-- Responsive-->
+        <link rel="stylesheet" href="/static/css/responsive.css">
+
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        {% block sidebar %}
+        
+        {% endblock %}
+        <div class="main-content">
+            <header>
+                <h3>
+                    <label for="nav-toggle">
+                        <span class="las la-bars"></span>
+                    </label>
+                    Dashboard
+                </h3>
+
+
+                    <form method="GET" action="{% url 'home:a-searchs' %}">
+                            <div class="others">
+                            <li><input name="q" placeholder="Tìm kiếm" type="text"></li>
+                            {% comment %} <li><a class="fa fa-search" href=""><img src="/static/IMG/search.png" alt="image" title="icon search"width="50%"></a></li> {% endcomment %}
+                            {% comment %} <li><a class="fa fa-user" href="login.html"><img src="/static/IMG/user.png" alt="image" title="icon user"></a></li>
+                            <li><a class="fa fa-cart" href="cart.html"><img src="/static/IMG/cart.png" alt="image" title="cart"></a></li> {% endcomment %}
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="user-wrapper">
+                            <div>
+                                <a href="{% url 'home:login' %}">Login</a>
+                                <p>Hello {{request.user}}</p>
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="created-user-wrapper">
+                            <div>
+                                <a href="{% url 'home:register' %}">Sign in</a>
+                        </div>
+                    </form>
+
+                </div>
+
+            </header>
+
+            
+        {% block main %}{% endblock %}
+
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

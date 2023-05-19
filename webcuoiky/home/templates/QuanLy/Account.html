@@ -1,0 +1,92 @@
+{% extends "QuanLy/base.html" %}
+{% block title %}Account's Admin{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2><span class="las la-bible"></span><span>Books Store</span></h2>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="{% url 'home:us-index' %}"><span class="las la-igloo"></span>
+                    <span>Dashboard</span></a>
+            </li>
+            <!-- quản lý list khách hàng -->
+            <li>
+                <a href="{% url 'home:us-customer' %}"><span class="las la-users"></span>
+                    <span>Customers</span></a>
+            </li>
+            
+            <!-- lưu danh sách sản phẩm -->
+            
+            <li>
+                <a href="{% url 'home:us-products' %}"><span class="las la-clipboard-list"></span>
+                    <span>Products</span></a>
+            </li>
+            <!-- lưu đơn hàng -->
+            <li>
+                <a href="{% url 'home:us-order' %}"><span class="las la-shopping-bag"></span>
+                    <span>Orders</span></a>
+            </li>
+            <!-- lưu list các loại sách -->
+            <li>
+                <a href="{% url 'home:us-inventory' %}"><span class="las la-receipt"></span>
+                    <span>Category</span></a>
+            </li>
+            <!-- thêm tài khoản đăng nhập cho admin -->
+            <li>
+                <a href="{% url 'home:us-account' %}" class="active"><span class="las la-user-circle"></span>
+                    <span>Accounts</span></a>
+            </li>
+            <!-- quyền khóa trang web -->
+            <li>
+                <a href="{% url 'home:us-tasks' %}"><span class="las la-clipboard-list"></span>
+                    <span>Tasks</span></a>
+            </li>
+            <li>
+                <a href="{% url 'home:logout' %}"><span class="las la-sign-out-alt"></span>
+                    <span>Log Out</span></a>
+
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<main>
+    <h2>List Account Admin</h2>
+    <div class="but-ed">
+        <a href="account/new.html"><button class="new-button las la-plus">Thêm</button></a>
+        <a href="#"><button class="reload-button las la-sync">Reload</button></a>
+        <a href="#"><button class="delete-button lar la-trash-alt">Delete</button></a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td>id</td>
+                <td>username</td>
+                <td>email</td>
+                <td>password</td>
+                <td class="but-ed">tools</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>{{user.id}}</th>
+                <th>{{user.username}}</th>
+                <th>{{user.email}}</th>
+                <th>{{user.password}}</th>
+                <th class="but-ed">
+                    <a href="#"><button class="delete-button lar la-trash-alt"></button></a>
+                </th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}
