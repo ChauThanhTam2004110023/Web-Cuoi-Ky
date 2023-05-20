@@ -57,11 +57,11 @@
 {% block main %}
 <main>
     <h2>List Account Admin</h2>
-    <div class="but-ed">
+    {% comment %} <div class="but-ed">
         <a href="account/new.html"><button class="new-button las la-plus">Thêm</button></a>
         <a href="#"><button class="reload-button las la-sync">Reload</button></a>
         <a href="#"><button class="delete-button lar la-trash-alt">Delete</button></a>
-    </div>
+    </div> {% endcomment %}
     <table>
         <thead>
             <tr>
@@ -82,7 +82,7 @@
                 <th>{{user.email}}</th>
                 <th>{{user.password}}</th>
                 <th class="but-ed">
-                    <a href="#"><button class="delete-button lar la-trash-alt"></button></a>
+                    {% comment %} <a href="#"><button class="delete-button lar la-trash-alt"></button></a> {% endcomment %}
                 </th>
             </tr>
         {% endfor %}

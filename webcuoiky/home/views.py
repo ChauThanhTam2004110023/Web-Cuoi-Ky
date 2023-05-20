@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.views import View
 from django.db.models import Q
-from .forms import ProductForm, CategoryInventoryForm, Register_User
+from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
@@ -71,6 +71,7 @@ class A_Logout(View):
     def get(self, request):
         logout(request)
         return redirect("home:login")
+        
 
 
 class U_Search(View):

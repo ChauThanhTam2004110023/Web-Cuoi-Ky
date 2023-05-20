@@ -23,6 +23,7 @@ urlpatterns = [
     path('us-tasks/', views.A_Tasks.as_view(), name='us-tasks'),
 
     
+
     path('a-new/', views.A_New.as_view(), name='a-new'),
     path('a-update/<int:id>/', views.A_Updated_Products.as_view(), name='a-update'),
     path('a-delete/<int:id>/', views.A_Delete_Products.as_view(), name='a-delete'),
