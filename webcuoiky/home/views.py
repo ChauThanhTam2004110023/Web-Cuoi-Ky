@@ -71,7 +71,62 @@ class A_Logout(View):
     def get(self, request):
         logout(request)
         return redirect("home:login")
+    
+
+class U_RegisterPage(View):
+    def get(self, request):
+        forms = RegisterCustomerForm()
+        context = {
+            'forms': forms
+        }
+        return render(request, 'user/reg.html', context)
+    def post(self, request):
+        forms = RegisterCustomerForm(request.POST)
+        if forms.is_valid():
+            return redirect('home:index')
+        else:
+            messages.error(request, 'An error accurred during registrations.')
+        context = {
+            'forms': forms
+        }
+        return render(request, 'user/reg.html', context)
+
+class U_Login(View):
+    def get(self, request):
+        context = None
+        username = request.session.get('user', None)
+        if username != None:
+            user = User.objects.get(username=username)
+            customer = Customer.objects.get(user=user)
+            order_items = OrderItem.objects.filter(order__customer=customer)
+
+            context = {
+                'customer': customer,
+                'order_items': order_items
+            }
+        return render(request, 'user/login.html', context)
+    
+    def post(self, request):
+        context={}
         
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            request.session['user']=user.username 
+            context['customer']=user
+        else:
+            messages.error(request, 'Email or password does not exist.')
+        
+        return redirect('home:u-login')
+    
+
+class U_Logout(View):
+    def get(self, request):
+        del request.session['user']
+        return redirect('home:u-login')
 
 
 class U_Search(View):

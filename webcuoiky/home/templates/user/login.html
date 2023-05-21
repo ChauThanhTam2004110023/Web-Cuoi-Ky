@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "user/base.html" %}
 {% block title %}LOGIN - Nhà Sách Công Giáo{% endblock %}
 
 {% block menu %}
@@ -17,18 +17,57 @@
 </div>
 {% endblock  %}
 
+
 {% block cartegory %}
 <!-- section -->
 <div class="form-login">
     <div class="cover">
-        <h1 class="form-login-heading">ĐĂNG NHẬP</h1>
-        <form action="" class="form-login-form">
-            <label for="username">Tên đăng nhập</label><br>
-            <input type="text" id="username"><br>
-            <label for="password">password</label><br>
-            <input type="password" id="password"><br><br>
-            <button>Đăng nhập</button>
-        </form>
+        {% if not customer %}
+            <h1 class="form-login-heading">ĐĂNG NHẬP</h1>
+            <form class="form-login-form" method="POST" action="{% url 'home:u-login' %}" >
+                {% csrf_token %}
+                <label for="username">Tên đăng nhập</label><br>
+                <input type="username" name="username" placeholder="Enter username"/><br>
+                <label for="password">password</label><br>
+                <input type="password" name="password" placeholder="Enter password"/><br><br>
+                <button>Đăng nhập</button>
+            </form>
+
+            <br>
+            <button onclick="register()">Đăng ký</button> 
+            <script>
+                function register() {
+                    window.location.href = "{% url 'home:u-register' %}";
+                }
+            </script>
+        {% else %}
+            <h1 class="form-login-heading">THÔNG TIN TÀI KHOẢN</h1>
+                <label for="">Tên đăng nhập</label>:  {{customer.user}}<br>
+                <label for="">Họ tên</label>:  {{customer.name}}<br>
+                <label for="">Địa chỉ</label>:  {{customer.address}}<br>
+                <label for="">Số điện thoại</label>:  {{customer.mobile}}<br>
+                <label for="">Thư điện tử</label>:  {{customer.email}}<br><br>
+
+            {% if order_items %}
+                <h2 class="form-login-heading">Các sản phẩm đã đặt</h2>
+                {% for order_item in order_items %}
+                    x{{order_item.quantity}}, {{order_item.product.name}}, {{order_item.created_date}}<br>
+
+                {% endfor %}
+                <br>
+            {% endif %}
+
+            <button onclick="logout()">Đăng xuất</button>
+            <script>
+                function logout() {
+                    window.location.href = "{% url 'home:u-logout' %}";
+                }
+            </script>
+        {% endif %}
+        <br>
+        <br>
+        <button><a href="{% url 'home:index' %}">Trang chủ</a></button>
     </div>
+    
 </div>
 {% endblock  %}

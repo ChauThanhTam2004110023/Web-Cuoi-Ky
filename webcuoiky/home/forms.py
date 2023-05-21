@@ -1,6 +1,7 @@
 from .models import *
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 
 class ProductForm(ModelForm):
@@ -27,3 +28,29 @@ class Register_User(UserCreationForm):
         self.fields['password1'].widget.attrs.update({'class':'form-control', 'placeholder':'Enter password1....'})
         self.fields['password2'].widget.attrs.update({'class':'form-control', 'placeholder':'Enter password2....'})
 
+class RegisterCustomerForm(ModelForm):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = Customer
+        fields = ['name', 'address', 'mobile', 'email']
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+
+        if username and password:
+            user = User.objects.create_user(username=username, password=password)
+
+            name = cleaned_data.get('name')
+            address = cleaned_data.get('address')
+            mobile = cleaned_data.get('mobile')
+            email = cleaned_data.get('email')
+
+            customer = Customer(user=user, name=name, address=address, mobile=mobile, email=email)
+            customer.save()
+            
+        return cleaned_data

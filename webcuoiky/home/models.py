@@ -58,12 +58,6 @@ class OrderItem(models.Model):
     def __str__(self):
         return self.product.name
 
-    # @property
-    # def get_quantity(self):
-    #     return self.quantity
 
-    # @property
-    # def get_total(self):
-    #     total = self.product.price * self.get_quantity
-    #     return total
+
 

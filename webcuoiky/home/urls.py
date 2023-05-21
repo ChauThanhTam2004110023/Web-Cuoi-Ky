@@ -3,11 +3,19 @@ from . import views
 
 app_name = 'home'
 
+
+
 urlpatterns = [
     path('register/', views.RegisterPage.as_view(), name='register'),
     path('login/', views.A_Login.as_view(), name='login'),
     path('logout/', views.A_Logout.as_view(), name='logout'),
-    
+
+    path('u-register/', views.U_RegisterPage.as_view(), name='u-register'),
+    path('u-login/', views.U_Login.as_view(), name='u-login'),
+    path('u-logout/', views.U_Logout.as_view(), name='u-logout'),
+
+
+
     path('', views.U_Index.as_view(),name='index'),
     path('category/<int:id>', views.U_Category.as_view(),name='category'),
     path('product/<int:id>/', views.U_Product.as_view(),name='product'),

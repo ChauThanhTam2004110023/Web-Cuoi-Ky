@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -28,27 +24,25 @@
             {% for category in categories %}
                 <li><a href="{% url 'home:category' id=category.id %}">{{category.name}}</a></li>
             {% endfor %}
-                {% comment %} <li><a href="{% url 'ton-giao' %}">Tôn Giáo</a></li>
-                <li><a href="thieu-nhi.html">Thiếu Nhi</a></li>
-                <li><a href="van-hoc.html">Văn Học</a></li>
-                <li><a href="tam-ly.html">Tâm Lý</a></li>
-                <li><a href="ngoai-ngu.html">Ngoại Ngữ</a></li>
-                <li><a href="kinh-te.html">Kinh Tế</a></li>
-                <li><a href="triet-hoc.html">Triết học</a></li>
-                <li><a href="giao-trinh.html">Giáo Trình</a></li>
-                <li><a href="tap-chi.html">Tạp Chí</a></li>
-                <li><a href="giai-tri.html">Giải Trí</a></li> {% endcomment %}
 
             </div>
 
             <form method="GET" action="{% url 'home:search' %}">
                 <div class="others">
                     <li><input name="q" placeholder="Tìm kiếm" type="text"></li>
-                    {% comment %} <li><a class="fa fa-search" href=""><img src="/static/IMG/search.png" alt="image" title="icon search"width="50%"></a></li> {% endcomment %}
-                    {% comment %} <li><a class="fa fa-user" href="login.html"><img src="/static/IMG/user.png" alt="image" title="icon user"></a></li>
-                    <li><a class="fa fa-cart" href="cart.html"><img src="/static/IMG/cart.png" alt="image" title="cart"></a></li> {% endcomment %}
+                    <li><a href="{% url 'home:u-login' %}" class="fa fa-user" ><img src="/static/IMG/user.png" alt="image" title="icon user"></a></li>
                 </div>
             </form>
+
+            {% comment %} <div class="others">
+                    <li><input name="q" placeholder="Regsiter" type="text"></li>
+                    <li><a href="{% url 'home:u-register' %}" class="fa fa-user" ><img src="/static/IMG/user.png" alt="image" title="icon user"></a></li>
+                </div>
+                <div class="others">
+                    <li><input name="q" placeholder="Logout" type="text"></li>
+                    <li><a href="{% url 'home:u-logout' %}" class="fa fa-user" ><img src="/static/IMG/user.png" alt="image" title="icon user"></a></li>
+                </div> {% endcomment %}
+            
         </header>
         {% block cartegory %}
         {% endblock  %}
