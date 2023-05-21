@@ -69,8 +69,6 @@
                 <td>id</td>
                 <td>username</td>
                 <td>email</td>
-                <td>password</td>
-                <td class="but-ed">tools</td>
             </tr>
         </thead>
         <tbody>
@@ -80,10 +78,8 @@
                 <th>{{user.id}}</th>
                 <th>{{user.username}}</th>
                 <th>{{user.email}}</th>
-                <th>{{user.password}}</th>
-                <th class="but-ed">
-                    {% comment %} <a href="#"><button class="delete-button lar la-trash-alt"></button></a> {% endcomment %}
-                </th>
+                {% comment %} <th>{{user.password}}</th> {% endcomment %}
+
             </tr>
         {% endfor %}
         </tbody>

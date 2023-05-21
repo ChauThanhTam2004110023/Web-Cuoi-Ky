@@ -278,7 +278,7 @@ class A_Inventory(View):
 
 class A_Account(View):
     def get(self, request):
-        users = User.objects.all()
+        users = User.objects.filter(is_staff=True)
         context = {
             'users': users
         }
