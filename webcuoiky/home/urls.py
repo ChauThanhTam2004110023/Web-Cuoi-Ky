@@ -45,6 +45,7 @@ urlpatterns = [
 
     path('cart', views.V_Cart.as_view(),name='cart'),
 
-    # path('a-login/', views.A_Login.as_view(), name='a-login')
+    path('u-pay/', views.U_Pay.as_view(), name='u-pay')
+
 
 ]

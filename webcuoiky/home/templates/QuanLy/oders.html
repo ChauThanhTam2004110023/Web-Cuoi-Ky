@@ -60,22 +60,22 @@
         <thead>
             <tr>
                 <td>id</td>
-                <td>Khach</td>
-                <td>Sach</td>
-                <td>soLuongMua</td>
-                <td>ngayMua</td>
-                <td>Tổng Tiền Đơn Hàng</td>
+                <td>Tài Khoản Khách</td>
+                <td>Tên Khách</td>
+                <td>Sách</td>
+                <td>Số Lượng Mua</td>
+                <td>Ngày Mua</td>
             </tr>
         </thead>
         <tbody>
         {% for order in orders %}
             <tr>
                 <th>{{order.id}}</th>
+                <th>{{order.order.customer.user}}</th>
                 <th>{{order.order.customer.name}}</th>
                 <th>{{order.product.name}}</th>
                 <th>{{order.quantity}}</th>
                 <th><p id="date"></p>{{order.created_date}}</th>
-                <th></th>
             </tr>
         {% endfor %}
         </tbody>

@@ -6,6 +6,8 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
+from datetime import datetime
+
 
 
 # Create your views here
@@ -514,11 +516,10 @@ class V_Cart(View):
             request.session['cart']=cart
 
         context={}
-        context.update(cart)
-        self.categories = Category.objects.all()
-        context['categories']= self.categories
+        if cart != None:
+            context.update(cart)
 
-        money_to_free_ship=200-context['total_price']
+        money_to_free_ship=200-context.get('total_price', 0)
         if money_to_free_ship > 0:
             context['money_to_free_ship']=money_to_free_ship
         else:
@@ -526,3 +527,31 @@ class V_Cart(View):
         
         return render(request, "user/cart.html", context)
 
+
+class U_Pay(View):
+    def get(self, request):
+        username = request.session.get('user', None)
+        if username != None:
+            cart = request.session.get('cart', None)
+            if cart != None and cart['items_count'] > 0:
+                user = User.objects.get(username=username)
+                customer = Customer.objects.get(user=user)
+                order = Order(customer=customer)
+                order.save()
+                items = cart['items']
+                for item_dict in items:
+                    product_dict = item_dict['product']
+                    product_dict['created_Date']= datetime.strptime(product_dict['created_Date'], "%Y-%m-%dT%H:%M:%S.%f")
+                    product_dict['category']= Category(product_dict['category'] ) 
+                    product = Product(**product_dict)
+                    order_item= OrderItem(product=product,order=order, quantity=item_dict['quantity'])
+                    order_item.save()
+                    product_in_stock = Product.objects.get(id=product.id)
+                    product_in_stock.quantity=product_in_stock.quantity-item_dict['quantity']
+                    product_in_stock.save()
+                del request.session['cart']
+            else:
+                messages.error(request, 'Cart empty!')
+        else:
+            return redirect('home:u-login')
+        return redirect('home:cart')
