@@ -149,6 +149,7 @@ class U_Search(View):
         }
         return render(request, 'user/search.html', context)
     
+
 class U_Category(View):
     def get(self, request, id):
         current_category = Category.objects.get(id=id)
@@ -288,8 +289,8 @@ class A_Tasks(View):
     def get(self, request):
         return render(request, 'QuanLy/tasks.html')
     
-
-@method_decorator(login_required(login_url='login'), name='dispatch')
+    
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_New(View):
     def get(self, request):
         productforms = ProductForm()
@@ -309,7 +310,8 @@ class A_New(View):
         return render(request, 'QuanLy/products/new.html', context)
     
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
+
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Updated_Products(View):
     def get(self, request, id):
         products = Product.objects.get(id=id)
@@ -333,7 +335,7 @@ class A_Updated_Products(View):
         return render(request, 'QuanLy/products/edit.html', context)
     
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Delete_Products(View):
     def get(self, request, id):
         products = Product.objects.get(id=id)
@@ -352,7 +354,7 @@ class A_Delete_Products(View):
         return render(request, 'QuanLy/products/delete.html', context)
     
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Created_Inventory(View):
     def get(self, request):
         create_inventorys = CategoryInventoryForm()
@@ -372,7 +374,7 @@ class A_Created_Inventory(View):
         return render(request, 'QuanLy/inventory/new.html', context)
 
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Updated_Inventory(View):
     def get(self, request, id):
         updated = Category.objects.get(id=id)
@@ -396,7 +398,7 @@ class A_Updated_Inventory(View):
         return render(request, 'QuanLy/inventory/edit.html', context)
     
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Delete_Inventory(View):
     def get(self, request, id):
         inventorys = Category.objects.get(id=id)
@@ -415,6 +417,7 @@ class A_Delete_Inventory(View):
         return render(request, 'QuanLy/inventory/delete.html', context)
 
 
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Search_Products(View):
     def get(self, request):
         q = request.GET.get('q') if request.GET.get('q') != None else ''
