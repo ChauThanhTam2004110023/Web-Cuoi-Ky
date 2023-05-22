@@ -21,10 +21,9 @@
             </div>
 
             <div class="menu">
-            {% for category in categories %}
-                <li><a href="{% url 'home:category' id=category.id %}">{{category.name}}</a></li>
-            {% endfor %}
-
+                {% for category in categories %}
+                    <li><a href="{% url 'home:category' id=category.id %}">{{category.name}}</a></li>
+                {% endfor %}
             </div>
 
             <form method="GET" action="{% url 'home:search' %}">

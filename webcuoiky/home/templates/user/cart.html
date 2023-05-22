@@ -11,11 +11,6 @@
                 <div class="cart-top-cart cart-top-item">
                     <i><img src="/static/IMG/cart.png" alt=""></i>
                 </div>
-                <div>
-                    {% comment %} {% if categorys %}
-                        <a href = "{% url 'home:category' id=categorys.id %}" >{{categorys.name}}</a>                  
-                    {% endif %} {% endcomment %}
-                </div>
             </div>
         </div>
     </div>
@@ -115,7 +110,7 @@
                 </div>
                 <div class="cart-content-right-button">
                     <a href="{% url 'home:u-pay' %}"><button>THANH TOÁN</button></a>
-                    
+
                 </div>
                 <div class="cart-content-right-dangnhap">
                     <p>TÀI KHOẢN NSCG</p>

@@ -1,37 +1,23 @@
 {% extends "user/base.html" %}
 {% block title %}PRODUCT - Nhà Sách Công Giáo{% endblock %}
 
-{% block menu %}
-<div class="menu">
-    <li><a href="ton-giao.html">Tôn Giáo</a></li>
-    <li><a href="thieu-nhi.html">Thiếu Nhi</a></li>
-    <li><a href="van-hoc.html">Văn Học</a></li>
-    <li><a href="tam-ly.html">Tâm Lý</a></li>
-    <li><a href="ngoai-ngu.html">Ngoại Ngữ</a></li>
-    <li><a href="kinh-te.html">Kinh Tế</a></li>
-    <li><a href="triet-hoc.html">Triết học</a></li>
-    <li><a href="giao-trinh.html">Giáo Trình</a></li>
-    <li><a href="tap-chi.html">Tạp Chí</a></li>
-    <li><a href="giai-tri.html">Giải Trí</a></li>
 
-</div>
-{% endblock  %}
 
 {% block cartegory %}
     <!------------------Product------------------>
     <section class="product">
         <div class="container">
             <div class="cartegory-top row">
-                <p><a href = {% url 'home:index' %} >TRANG CHỦ</a> 
+                <p><a href = "{% url 'home:index' %}" >TRANG CHỦ</a> 
                     {% if current_category != None %}
-                        / <a href = {% url 'home:category' id=current_category.id %} >{{current_category.name}}</a> / <a href = {% url 'home:product' id=product.id %} >{{product.name}}</a>
+                        / <a href = "{% url 'home:category' id=current_category.id %}" >{{current_category.name}}</a> / <a href = "{% url 'home:product' id=product.id %}">{{product.name}}</a>
                     {% endif %}
                 </p>
             </div>
             <div class="product-content row">
                 <div class="product-content-left row">
                     <div class="product-content-left-big-img">
-                        <img src="/{{product.images}}" alt="image" title="Trung tín với đời sống thánh hiến">
+                        <img src="/{{product.images}}" alt="image">
                     </div>
                 </div>
                 <div class="product-content-right">
@@ -40,15 +26,6 @@
                         <h2>{{product.name}}</h2>
                     </div>
                     <div class="product-content-right-product-price">
-                        {% comment %} <p>• Tác giả: Lm Montfort Phạm Quốc Huyên O.Cist</p>
-                        <p>• Loại bìa: Bìa mềm</p>
-                        <p>• NXB: Hồng Đức</p>
-                        <p>• Kích thước: 14.5 x 20.5 cm</p>
-                        <p>• Số trang: 168 </p>
-                        <p>• Năm xuất bản: 10/2022</p> {% endcomment %}
-
-                        {% comment %} <p> {{product.descriptions | linebreaks }} </p> {% endcomment %}
-
                         <p> {{product.descriptions | linebreaksbr  }} </p>
                         <p>Giá: {{product.price |floatformat:3}}</p>
                     </div>

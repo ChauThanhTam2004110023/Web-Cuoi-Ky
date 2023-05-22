@@ -158,12 +158,10 @@ class U_Category(View):
         )
         product_count = products.count()
 
-        categories = Category.objects.all()
         context = {
             'current_category': current_category,
             'products':products,
             'product_count': product_count,
-            'categories': categories,
         }
         return render(request, 'user/category.html', context)
     
@@ -171,9 +169,7 @@ class U_Category(View):
 
 class U_Index(View):
     def get(self,request):
-        categories = Category.objects.all()
         context = {
-            'categories': categories
         }
         return render(request,"user/index.html", context)
 
@@ -214,7 +210,7 @@ class U_Cart(View):
         )
         context = {
             'orderitems': orderitems,
-            'orderitem_products': orderitem_products
+            'orderitem_products': orderitem_products,
         }
         return render(request, 'user/cart.html', context)
 
