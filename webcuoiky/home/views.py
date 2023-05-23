@@ -153,6 +153,7 @@ class U_Search(View):
         return render(request, 'user/search.html', context)
     
 
+
 class U_Category(View):
     def get(self, request, id):
         current_category = Category.objects.get(id=id)
@@ -168,6 +169,7 @@ class U_Category(View):
         }
         return render(request, 'user/category.html', context)
     
+
 
 class U_Index(View):
     def get(self,request):
