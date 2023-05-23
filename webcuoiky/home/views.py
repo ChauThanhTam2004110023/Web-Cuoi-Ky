@@ -176,6 +176,14 @@ class U_Index(View):
         context = {
         }
         return render(request,"user/index.html", context)
+    
+class U_Base(View):
+    def get(self,request):
+        user = User.objects.all()
+        context = {
+            'user': user
+        }
+        return render(request,"user/base.html", context)
 
 
 
