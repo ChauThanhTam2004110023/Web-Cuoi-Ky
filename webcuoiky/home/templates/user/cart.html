@@ -109,8 +109,10 @@
                     {% endif %}
                 </div>
                 <div class="cart-content-right-button">
+                    {% if categories %}
+                        <a href="{% url 'home:category' id=categories.0.id %}"><button>TIEP TUC MUA SAM</button></a>
+                    {% endif %}
                     <a href="{% url 'home:u-pay' %}"><button>THANH TOÁN</button></a>
-
                 </div>
                 <div class="cart-content-right-dangnhap">
                     <p>TÀI KHOẢN NSCG</p>

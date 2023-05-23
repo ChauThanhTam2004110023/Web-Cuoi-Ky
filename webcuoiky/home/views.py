@@ -95,6 +95,8 @@ class U_RegisterPage(View):
         }
         return render(request, 'user/reg.html', context)
 
+
+
 class U_Login(View):
     def get(self, request):
         context = None
@@ -123,7 +125,7 @@ class U_Login(View):
             context['customer']=user
         else:
             messages.error(request, 'Email or password does not exist.')
-        
+
         return redirect('home:u-login')
     
 
@@ -131,6 +133,7 @@ class U_Logout(View):
     def get(self, request):
         del request.session['user']
         return redirect('home:u-login')
+
 
 
 class U_Search(View):
@@ -165,7 +168,6 @@ class U_Category(View):
         }
         return render(request, 'user/category.html', context)
     
-
 
 class U_Index(View):
     def get(self,request):
@@ -202,6 +204,8 @@ class U_Product(View):
         return render(request, "user/product.html", context)
 
 
+
+@method_decorator(login_required(login_url='home:u-login'), name='dispatch')
 class U_Cart(View):
     def get(self, request, id):
         orderitems = Product.objects.get(id=id)
@@ -215,6 +219,8 @@ class U_Cart(View):
         return render(request, 'user/cart.html', context)
 
 
+
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Index(View):
     def get(self, request):
         customers = Customer.objects.all()
@@ -236,6 +242,7 @@ class A_Index(View):
 
     
 
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Customer(View):
     def get(self, request):
         customers = Customer.objects.all()
@@ -243,8 +250,9 @@ class A_Customer(View):
             'customers': customers
         }
         return render(request, 'QuanLy/customer.html', context)
-    
 
+
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Product(View):
     def get(self, request):
         products = Product.objects.all()
@@ -254,6 +262,7 @@ class A_Product(View):
         return render(request, 'QuanLy/products.html', context)
     
 
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Order(View):
     def get(self, request):
         orders = OrderItem.objects.all()
@@ -263,6 +272,7 @@ class A_Order(View):
         return render(request, 'QuanLy/oders.html', context)
 
 
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Inventory(View):
     def get(self, request):
         inventorys = Category.objects.all()
@@ -272,6 +282,7 @@ class A_Inventory(View):
         return render(request, 'QuanLy/inventory.html', context)
     
 
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Account(View):
     def get(self, request):
         users = User.objects.filter(is_staff=True)
@@ -281,6 +292,7 @@ class A_Account(View):
         return render(request, 'QuanLy/Account.html', context)
     
 
+@method_decorator(login_required(login_url='home:login'), name='dispatch')
 class A_Tasks(View):
     def get(self, request):
         return render(request, 'QuanLy/tasks.html')
