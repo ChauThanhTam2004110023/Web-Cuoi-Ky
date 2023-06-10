@@ -14,16 +14,17 @@
                 </p>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="cartegory-left">
-                        <ul>
+                <div class="cartegory-right-content row">
+                    {% for product in products %}
+                            <div class="cartegory-right-content-item">
+                                <a href="{% url 'home:product' id=product.id %}"><img src="/{{product.images}}" alt="image" title="sách đs thánh hiến "></a>
+                                <a href="#">
+                                <h2>{{product.name}}</h2>
+                                <p>Giá: {{product.price |floatformat:3}} VND</p></a>
 
-                            {% for category in categories %}
-                            <li class="cartegory-left-li"><a href="{% url 'category' id=category.id %}">{{category.name}}</a></li>
-
-                             {% endfor %}
-                        </ul>
-                    </div>
+                            </div>
+                    {% endfor %}
+                </div> 
                     <div class="cartegory-right row">
                         <div class="cartegory-right-top-item">
                             <p>Có {{product_count}} sách {{current_category.name}}</p>

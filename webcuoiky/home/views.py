@@ -139,15 +139,13 @@ class U_Logout(View):
 class U_Search(View):
     def get(self, request):
         q = request.GET.get('q') if request.GET.get('q') != None else ''
-        searchs = Product.objects.filter(
+        products = Product.objects.filter(
             Q(name__icontains=q) |
             Q(descriptions__icontains=q)
         )
-        orderitems = OrderItem.objects.all()
-        product_count = searchs.count()
+        product_count = products.count()
         context = {
-            'searchs': searchs,
-            'orderitems': orderitems,
+            'products': products,
             'product_count': product_count
         }
         return render(request, 'user/search.html', context)
