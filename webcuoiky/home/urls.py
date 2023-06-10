@@ -28,7 +28,7 @@ urlpatterns = [
     path('us-order/', views.A_Order.as_view(), name='us-order'),
     path('us-inventory/', views.A_Inventory.as_view(), name='us-inventory'),
     path('us-account/', views.A_Account.as_view(), name='us-account'),
-    path('us-tasks/', views.A_Tasks.as_view(), name='us-tasks'),
+    # path('us-tasks/', views.A_Tasks.as_view(), name='us-tasks'),
 
     
 

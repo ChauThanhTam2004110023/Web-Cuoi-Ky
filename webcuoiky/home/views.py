@@ -302,10 +302,10 @@ class A_Account(View):
         return render(request, 'QuanLy/Account.html', context)
     
 
-@method_decorator(login_required(login_url='home:login'), name='dispatch')
-class A_Tasks(View):
-    def get(self, request):
-        return render(request, 'QuanLy/tasks.html')
+# @method_decorator(login_required(login_url='home:login'), name='dispatch')
+# class A_Tasks(View):
+#     def get(self, request):
+#         return render(request, 'QuanLy/tasks.html')
     
     
 @method_decorator(login_required(login_url='home:login'), name='dispatch')
